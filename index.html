@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+        //1) Задача состоит в следующем! Делаем GET запрос https://playwithpromise.herokuapp.com/api/order-system получаем даные в виде массива
+        // Создаем разметку с помощью createElement и выводим список продуктов, а именно поля productImage, productName, description!(productImage - ссылка на картинку)
+        let pr1 = new Promise(function (res, rej) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://playwithpromise.herokuapp.com/api/order-system')
+            xhr.send()
+            xhr.onload = (function () {
+                if (xhr.status === 200) {
+                    res(xhr.responseText)
+
+                }
+            })
+        }).then(data => {
+            let filtered = JSON.parse(data);
+            let name = [];
+            let image = [];
+            let desc = [];
+            for (key of filtered) {
+                name.push(key.productName)
+                image.push(key.productImage)
+                desc.push(key.productDescription)
+
+
+            }
+            let ParentDiv = document.createElement("div")
+            let ImageDiv = document.createElement("div")
+            let NameDiv = document.createElement("div")
+            let DescDiv = document.createElement("div")
+            document.body.append(ParentDiv);
+            ParentDiv.append(ImageDiv);
+            ParentDiv.append(NameDiv);
+            ParentDiv.append(DescDiv);
+
+            ImageDiv.innerHTML = image;
+            NameDiv.innerHTML = name;
+            DescDiv.innerHTML = desc;
+
+
+        })
+
+
+
+    </script>
+</body>
+
+</html>
